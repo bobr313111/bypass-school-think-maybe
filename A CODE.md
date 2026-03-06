@@ -1,0 +1,185 @@
+<html><head>
+    <meta name="description" content="Learn about geology in a fun way!">
+    <meta name="keywords" content="School, Science, STEM">
+    <meta name="author" content="AxiomEdu">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+
+    body {
+        color: white;
+        background-color: black;
+        font-family: "Inter";
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    button {
+        background-color: #3b82f6;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        border-radius: 15px;
+        cursor: pointer;
+    }
+
+    button:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
+    #cover {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(128, 134, 139);
+        z-index: 1;
+    }
+
+    #options {
+        display: flex;
+        gap: 10px;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    #options div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+        background-color: #3b82f6;
+        padding: 4px;
+        border-radius: 4px;
+    }
+</style></head>
+
+
+<body><center>
+    <h2>Welcome to Axiom!</h2>
+    <p>Use one of the following to make the link last longer!</p>
+    <div id="options">
+        <div id="window">
+            <span class="material-symbols-outlined">tab</span>
+            <span>Window A:B</span>
+        </div>
+        <div id="file">
+            <span class="material-symbols-outlined">file_copy</span>
+            <span>File Cloak</span>
+        </div>
+        <div id="blob">
+            <span class="material-symbols-outlined">link</span>
+            <span>Blob Cloak</span>
+        </div>
+        <div onclick="cloak()">
+            <span class="material-symbols-outlined">language</span>
+            <span>A:B Cloak</span>
+        </div>
+    </div>
+</center>
+
+
+<script>
+
+    function cloak() {
+        tab = window.open("about:blank", target="_blank")
+        tab.document.write(`
+      <html>
+      <head>
+        <title>Google</title>
+        <link rel="icon" href="${window.location.origin}/os/google_favicon.ico" type="image/x-icon">
+      </head>
+      <body>
+        <iframe src="main.html" style="border:none; height: 100%; width: 100%; position: fixed; left: 0px; top: 0px;">
+      </body>
+`)
+        tab.document.close()
+    }
+
+    
+    // check for mobile
+    if (navigator.userAgent.match(/Android/i) ||
+        navigator.userAgent.match(/webOS/i) ||
+        navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i) ||
+        navigator.userAgent.match(/iPod/i) ||
+        navigator.userAgent.match(/BlackBerry/i) ||
+        navigator.userAgent.match(/Windows Phone/i)) {
+        window.location.href = "mobile.html"
+    }
+
+    let windowab = document.getElementById("window")
+    windowab.addEventListener("click", () => {
+        const windowFeatures = 'width=1200,height=1200,resizable=yes,scrollbars=yes,status=yes';
+        const newWindow = window.open(window.location.origin, 'Google', windowFeatures);
+        
+        setTimeout(() => {
+            if (newWindow) {
+                try {
+                    newWindow.document.title = "Google";
+                    const link = newWindow.document.createElement('link');
+                    link.rel = 'icon';
+                    link.href = 'os/google_favicon.ico';
+                    newWindow.document.head.appendChild(link);
+                } catch (e) {
+                    console.log("Could not modify window properties due to cross-origin restrictions");
+                }
+            }
+        }, 100);
+    })
+    
+    let file = document.getElementById("file")
+    file.addEventListener("click", () => {
+        const htmlContent = `
+            <html>
+            <head>
+                <title>Google</title>
+                <link rel="icon" href="${window.location.origin}/os/google_favicon.ico" type="image/x-icon">
+            </head>
+            <body>
+                <iframe src="${window.location.origin}/main.html" style="border:none; height: 100%; width: 100%; position: fixed; left: 0px; top: 0px;"></iframe>
+            </body>
+            </html>
+        `;
+        const object_URL = URL.createObjectURL(new Blob([htmlContent], { type: 'text/html' }));
+
+        const a = document.createElement('a');
+        a.href = object_URL;
+        a.download = "axiom_launcher_" + window.location.origin + ".html"; 
+
+        document.body.appendChild(a);
+        a.click();
+    })
+
+    let blob = document.getElementById("blob")
+    blob.addEventListener("click", () => {
+        const htmlContent = `
+            <html>
+            <head>
+                <title>Google</title>
+                <link rel="icon" href="${window.location.origin}/os/google_favicon.ico" type="image/x-icon">
+            </head>
+            <body>
+                <iframe src="${window.location.origin}/main.html" style="border:none; height: 100%; width: 100%; position: fixed; left: 0px; top: 0px;"></iframe>
+            </body>
+            </html>
+        `;
+        const object_URL = URL.createObjectURL(new Blob([htmlContent], { type: 'text/html' }));
+
+        window.open(object_URL, '_blank');
+    })
+</script>
+</body></html>
